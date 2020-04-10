@@ -14,18 +14,27 @@ class PairController {
     
     static let shared = PairController()
     
-    var names: [String] = []
+    var names: [String] = [] {
+        didSet {
+            pairs = names.chunked(into: 2)
+        }
+    }
+    
     var pairs: [[String]] = [[]]
     
     func shuffleAndRandomize() {
-        let shuffledNames = names.shuffled()
-        pairs = shuffledNames.chuncked(into: 2)
-        savePairsToPersistentStore()
+        names = names.shuffled()
+        pairs = names.chunked(into: 2)
+        saveNamesToPersistentStore()
+    }
+    
+    func removeName() {
+        
     }
     
     //MARK: - Persistence
     
-    func fileURL() -> URL {
+    private func fileURL() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = paths[0]
         let fileName = "pair.json"
@@ -37,16 +46,6 @@ class PairController {
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(names)
-            try data.write(to: fileURL())
-        } catch {
-            print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
-        }
-    }
-    
-    func savePairsToPersistentStore() {
-        let encoder = JSONEncoder()
-        do {
-            let data = try encoder.encode(pairs)
             try data.write(to: fileURL())
         } catch {
             print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
@@ -65,15 +64,4 @@ class PairController {
         }
     }
     
-    func loadPairsFromPersistentStore() {
-        let decoder = JSONDecoder()
-        do {
-            let data = try Data(contentsOf: fileURL())
-            let pairs = try decoder.decode([[String]].self, from: data)
-            self.pairs = pairs
-        } catch {
-            print("Error with \(#function) : \(error.localizedDescription) : --> \(error)")
-
-        }
-    }
 }

@@ -14,6 +14,7 @@
 		9EA348D22440CC3D009B60B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EA348D02440CC3D009B60B9 /* LaunchScreen.storyboard */; };
 		9EA348DF2440CCBD009B60B9 /* PairController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA348DE2440CCBD009B60B9 /* PairController.swift */; };
 		9EA348E22440CCE1009B60B9 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA348E12440CCE1009B60B9 /* ArrayExtension.swift */; };
+		9EA348E42440D2CD009B60B9 /* PairListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA348E32440D2CD009B60B9 /* PairListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		9EA348D32440CC3D009B60B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EA348DE2440CCBD009B60B9 /* PairController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairController.swift; sourceTree = "<group>"; };
 		9EA348E12440CCE1009B60B9 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		9EA348E32440D2CD009B60B9 /* PairListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		9EA348DC2440CCA2009B60B9 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9EA348E32440D2CD009B60B9 /* PairListTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				9EA348C62440CC39009B60B9 /* AppDelegate.swift in Sources */,
 				9EA348C82440CC39009B60B9 /* SceneDelegate.swift in Sources */,
 				9EA348E22440CCE1009B60B9 /* ArrayExtension.swift in Sources */,
+				9EA348E42440D2CD009B60B9 /* PairListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
