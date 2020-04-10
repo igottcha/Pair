@@ -28,8 +28,11 @@ class PairController {
         saveNamesToPersistentStore()
     }
     
-    func removeName() {
-        
+    func removeName(name: String) {
+        guard let index = names.firstIndex(of: name) else { return }
+        names.remove(at: index)
+        pairs = names.chunked(into: 2)
+        saveNamesToPersistentStore()
     }
     
     //MARK: - Persistence

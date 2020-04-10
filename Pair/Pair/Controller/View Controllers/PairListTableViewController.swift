@@ -9,14 +9,20 @@
 import UIKit
 
 class PairListTableViewController: UITableViewController {
-
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         PairController.shared.loadNamesFromPersistentStore()
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        PairController.shared.loadNamesFromPersistentStore()
+        tableView.reloadData()
+    }
+    
     //MARK: - Actions
     
     @IBAction func addNameButtonTapped(_ sender: UIBarButtonItem) {
@@ -45,24 +51,24 @@ class PairListTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return PairController.shared.pairs.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return PairController.shared.pairs[section].count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
         let name = PairController.shared.pairs[indexPath.section][indexPath.row]
         
         cell.textLabel?.text = name
-
+        
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Group \(section + 1)"
     }
@@ -70,9 +76,24 @@ class PairListTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let name = PairController.shared.pairs[indexPath.section][indexPath.row]
+            tableView.beginUpdates()
+            print(PairController.shared.pairs)
+            if let lastIndex = PairController.shared.pairs.last {
+                if lastIndex.count == 1 {
+//                    let indexSet = IndexSet(integer: PairController.shared.pairs.endIndex)
+                    PairController.shared.removeName(name: name)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    tableView.deleteSections([indexPath.section], with: .fade)
+                } else {
+                    PairController.shared.removeName(name: name)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
+            tableView.reloadData()
+            print(PairController.shared.pairs)
+            tableView.endUpdates()
         }
     }
-
+    
 }
